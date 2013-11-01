@@ -146,7 +146,8 @@ class Rekognition_API {
   public function RkFaceDetect($req, 
                                $scale,
                               $request_mode = Rekognition_API::REQUEST_UNDEFINED, 
-                              $return_mode = Rekognition_API::RETURN_JSON){
+                              $return_mode = Rekognition_API::RETURN_JSON,
+                              $jobs = 'part_gender_emotion_age_glass_mouth'){
     if(!$request_mode) {
       return 'Undefined request mode!';
     }
@@ -156,7 +157,7 @@ class Rekognition_API {
       $parameters = array(
                   'api_key' => self::$api_key_, 
                   'api_secret' => self::$api_secret_, 
-                  'jobs' => 'face_part_gender_emotion_age_glass_mouth',
+                  'jobs' => 'face_' . $jobs,
                   'urls' => $req,
                   'name_space' => self::$name_space_,
                   'user_id' => self::$user_id_);
@@ -170,7 +171,7 @@ class Rekognition_API {
       $im = $this->RkImageResize($req, $scale, $request_mode);  
       $data = array('api_key' => self::$api_key_, 
               'api_secret' => self::$api_secret_, 
-              'jobs' => 'face_part_gender_emotion_age_glass_mouth',
+              'jobs' => 'face_' . $jobs,
               'base64' => base64_encode($im),
               'name_space' => self::$name_space_,
               'user_id' => self::$user_id_); 
